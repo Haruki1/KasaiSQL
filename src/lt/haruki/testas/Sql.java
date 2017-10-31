@@ -31,6 +31,8 @@ public class Sql {
 	private static ResultSetMetaData rsm = null;
 	private static ResultSet rs = null;
 	
+	private static Window window;
+	
 	public static Object[][] content;
 	public static Object[] header;
 	private static int tWidth = 0;
@@ -38,8 +40,9 @@ public class Sql {
 	private static int j = 0;
 	private static String query = "";
 	
-	public Sql(final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD) {
+	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD) {
 		RegisterSqlDriver();
+		window = new Window(640, 480, title);
 		this.DB_HOSTNAME = DB_HOSTNAME;
 		this.DB_ENCODING = DB_ENCODING;
 		this.DB_NAME = DB_NAME;
@@ -81,6 +84,7 @@ public class Sql {
 			System.out.println ("Unable to execute query!");
 			ShowSQLException(e);
 		}
+		window.drawTable(content, header);
 	}
 
 	public void RegisterSqlDriver() {
@@ -151,10 +155,10 @@ public class Sql {
 
 			ResultSet tables = dbMetaData.getTables (null, null, "%", new String[] {"TABLE"});
 			System.out.print("Existing tables: ");
-			//window.setLabel("Existing tables: ");
+			window.setLabel("Existing tables: ");
 			while (tables.next()) {
 				System.out.print(tables.getString("TABLE_NAME") + " ");
-				//window.extendLabel(tables.getString("TABLE_NAME") + " ");
+				window.extendLabel(tables.getString("TABLE_NAME") + " ");
 			}
 			System.out.println();
 			tables.close ();
