@@ -16,9 +16,12 @@ public class App {
 			sql.DisableAutoCommit();
 			sql.ShowTables();
 			/*==QUERIES====================================================*/
-			sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id, b.diena, b.status FROM CARS a LEFT OUTER JOIN days b USING (car_id)");
-			sql.DoQuery("SELECT count(case a.status when 'D' then 1 else null end) FROM days a WHERE car_id = 'EEA 112'");
-			sql.DoQuery("SELECT count(case a.status when 'I' then 1 else null end) FROM days a WHERE car_id = 'EEA 112'");
+			sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id, b.diena, b.status"
+					+ " FROM CARS a LEFT OUTER JOIN days b USING (car_id)");
+			sql.DoQuery("SELECT count(case a.status when 'D' then 1 else null end)"
+					+ " FROM days a WHERE car_id = 'EEA 112'");
+			sql.DoQuery("SELECT count(case a.status when 'I' then 1 else null end)"
+					+ " FROM days a WHERE car_id = 'EEA 112'");
 			/*=============================================================*/
 		} catch(Exception e) {
 			System.out.println("Something gone terribly wrong!");

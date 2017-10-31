@@ -38,6 +38,7 @@ public class Sql {
 	private int tWidth = 0;
 	private int tHeight = 0;
 	private int j = 0;
+	String firstWord;
 	
 	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
@@ -52,48 +53,65 @@ public class Sql {
 	}
 	
 	public void DoQuery(String query) {
-		try {
-			s = c.createStatement();
-			rs = s.executeQuery(query);
-			rsm = rs.getMetaData();
-			tWidth = rsm.getColumnCount();
-			while(rs.next()) {
-				tHeight++;
-			}
-			content = new Object[tHeight][tWidth];
-			header = new Object[tWidth];
-			for (int i = 0; i < tWidth; i++) {
-				header[i] = rsm.getColumnName(i+1);
-			}
-			rs = s.executeQuery(query);
-			for(int i = 0; i < tWidth; i++)
-				System.out.print("-------------");
-			System.out.println("-");
-			for(Object s: header) {
-				System.out.format("|%12s", s);
-			}
-			System.out.println("|");
-			for(int i = 0; i < tWidth; i++)
-				System.out.print("-------------");
-			System.out.println("-");
-			while(rs.next()) {
-				for(int i = 0; i < tWidth; i++) {
-					content[j][i] = rs.getString(rsm.getColumnName(i+1));
-					System.out.format("|%12s",rs .getString(rsm.getColumnName(i+1)));
+		
+		firstWord = query.substring(0, query.indexOf(" "));
+		
+		if(firstWord.equalsIgnoreCase("select")) {
+			try {
+				s = c.createStatement();
+				rs = s.executeQuery(query);
+				rsm = rs.getMetaData();
+				tWidth = rsm.getColumnCount();
+				while(rs.next()) {
+					tHeight++;
 				}
-				j++;
-				System.out.print("|\n");
+				content = new Object[tHeight][tWidth];
+				header = new Object[tWidth];
+				for (int i = 0; i < tWidth; i++) {
+					header[i] = rsm.getColumnName(i+1);
+				}
+				rs = s.executeQuery(query);
+				for(int i = 0; i < tWidth; i++)
+					System.out.print("-------------");
+				System.out.println("-");
+				for(Object s: header) {
+					System.out.format("|%12s", s);
+				}
+				System.out.println("|");
+				for(int i = 0; i < tWidth; i++)
+					System.out.print("-------------");
+				System.out.println("-");
+				while(rs.next()) {
+					for(int i = 0; i < tWidth; i++) {
+						content[j][i] = rs.getString(rsm.getColumnName(i+1));
+						System.out.format("|%12s",rs .getString(rsm.getColumnName(i+1)));
+					}
+					j++;
+					System.out.print("|\n");
+				}
+				for(int i = 0; i < tWidth; i++)
+					System.out.print("-------------");
+				System.out.println("-");
+			} catch (SQLException e) {
+				System.out.println ("Unable to execute query! Wrong syntax?");
+				ShowSQLException(e);
 			}
-			for(int i = 0; i < tWidth; i++)
-				System.out.print("-------------");
-			System.out.println("-");
-		} catch (SQLException e) {
-			System.out.println ("Unable to execute query! Wrong syntax?");
-			ShowSQLException(e);
+			window.drawTable(content, header);
+			tWidth = 0; tHeight = 0; j = 0;
+			content = null; header = null;
+		} else if(firstWord.equalsIgnoreCase("update") || firstWord.equalsIgnoreCase("insert")) {
+			try {
+				s = c.createStatement();
+				rs = s.executeQuery(query);
+			} catch(SQLException e) {
+				System.out.println("Unable to update records!");
+				ShowSQLException(e);
+			}
+		} else {
+			//NOTHING!
 		}
-		window.drawTable(content, header);
-		tWidth = 0; tHeight = 0; j = 0;
-		content = null; header = null;
+		
+		
 	}
 
 	public void RegisterSqlDriver() {

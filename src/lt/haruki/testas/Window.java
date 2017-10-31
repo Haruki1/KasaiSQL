@@ -2,9 +2,6 @@ package lt.haruki.testas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-//import java.awt.event.MouseAdapter;
-//import java.awt.event.MouseEvent;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -13,7 +10,6 @@ import javax.swing.SwingConstants;
 
 public class Window {
 	private JFrame frame;
-	//private JFrame frame2;
 	private JLabel label;
 	private JTable table;
 	private int width;
@@ -47,16 +43,6 @@ public class Window {
 	
 	public void setLabel(String x) {
 		label.setText("<html>" + x + "</html>");
-		/*label.addMouseListener(new MouseAdapter() { 
-		    public void mouseClicked(MouseEvent e) {
-		       frame2 = new JFrame("new frame");
-		       frame2.setResizable(false);
-		       frame2.setLocationRelativeTo(null);
-		       frame2.setVisible(true);
-		       frame2.setAlwaysOnTop(true);
-		       frame2.pack();
-		    }
-		});*/
 	}
 	
 	public void extendLabel(String x) {
