@@ -1,7 +1,5 @@
 package lt.haruki.testas;
 
-import java.sql.*;
-
 public class App {
 
 	/*== VARIABLES ===========================*/
@@ -10,11 +8,7 @@ public class App {
 	
 	public static void main(String args[]) throws Exception {
 		
-		sql = new Sql("KasaiSQL", "localhost", "UTF8", "C:/Users/Darbinis/Desktop/TESTAS.FDB", "SYSDBA", "testas");
-		sql();
-	}
-	
-	public static void sql() {
+		sql = new Sql("KasaiSQL", "localhost", "UTF8", "C:/Users/Darbinis/Desktop/TESTAS.FDB", "SYSDBA", "testas", "cars");
 		
 		try {
 			sql.PrintDriverVersion();
@@ -26,5 +20,6 @@ public class App {
 		} finally {
 			sql.endConnection();
 		}
+		
 	}
 }

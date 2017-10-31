@@ -19,28 +19,27 @@ public class Sql {
 	public final String DB_NAME;
 	public final String DB_USER;
 	public final String DB_PASSWORD;
-	public final String TABLE_NAME = "days";
+	public final String DB_TABLE_NAME;
 	
 	public final String DB_URL;
 	/*=========================================================================*/
 	
-	private static Driver d = null;
-	private static Connection c = null;
-	private static DatabaseMetaData dbMetaData;
-	private static Statement s = null;
-	private static ResultSetMetaData rsm = null;
-	private static ResultSet rs = null;
+	private Driver d = null;
+	private Connection c = null;
+	private DatabaseMetaData dbMetaData;
+	private Statement s = null;
+	private ResultSetMetaData rsm = null;
+	private ResultSet rs = null;
 	
-	private static Window window;
+	private Window window;
 	
-	public static Object[][] content;
-	public static Object[] header;
-	private static int tWidth = 0;
-	private static int tHeight = 0;
-	private static int j = 0;
-	private static String query = "";
+	public Object[][] content;
+	public Object[] header;
+	private int tWidth = 0;
+	private int tHeight = 0;
+	private int j = 0;
 	
-	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD) {
+	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
 		window = new Window(640, 480, title);
 		this.DB_HOSTNAME = DB_HOSTNAME;
@@ -48,6 +47,7 @@ public class Sql {
 		this.DB_NAME = DB_NAME;
 		this.DB_USER = DB_USER;
 		this.DB_PASSWORD = DB_PASSWORD;
+		this.DB_TABLE_NAME = DB_TABLE_NAME;
 		DB_URL = DB_DRIVER_NAME + ":" + DB_HOSTNAME + ":" + DB_NAME + "?lc_ctype=" + DB_ENCODING;
 	}
 	
@@ -62,7 +62,7 @@ public class Sql {
 			}
 			content = new Object[tHeight][tWidth];
 			header = new Object[tWidth];
-			rs = dbMetaData.getColumns(null, null, TABLE_NAME, "%");
+			rs = dbMetaData.getColumns(null, null, DB_TABLE_NAME, "%");
 			for (int i = 0; i < tWidth; i++) {
 				header[i] = rsm.getColumnName(i+1);
 			}
