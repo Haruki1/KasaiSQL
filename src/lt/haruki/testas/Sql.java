@@ -53,16 +53,19 @@ public class Sql {
 	
 	public void DoQuery(String query) {
 		try {
-			s = c.createStatement ();
+			s = c.createStatement();
 			rs = s.executeQuery(query);
 			rsm = rs.getMetaData();
 			tWidth = rsm.getColumnCount();
 			while(rs.next()) {
 				tHeight++;
 			}
+			System.out.println("DEBUG: " + tWidth + " " + tHeight);
 			content = new Object[tHeight][tWidth];
+			System.out.println("len" + content.length);
+			System.out.println("len" + content[0].length);
 			header = new Object[tWidth];
-			rs = dbMetaData.getColumns(null, null, DB_TABLE_NAME, "%");
+			System.out.println("lenn" + header.length);
 			for (int i = 0; i < tWidth; i++) {
 				header[i] = rsm.getColumnName(i+1);
 			}
@@ -88,6 +91,8 @@ public class Sql {
 			ShowSQLException(e);
 		}
 		window.drawTable(content, header);
+		tWidth = 0; tHeight = 0; j = 0;
+		content = null; header = null;
 	}
 
 	public void RegisterSqlDriver() {

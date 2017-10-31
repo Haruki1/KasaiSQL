@@ -17,6 +17,7 @@ public class App {
 			sql.ShowTables();
 			/*==QUERIES====================================================*/
 			sql.DoQuery("SELECT * FROM CARS");
+			sql.DoQuery("SELECT * FROM DAYS");
 		} finally {
 			sql.endConnection();
 		}

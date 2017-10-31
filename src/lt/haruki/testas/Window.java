@@ -48,7 +48,7 @@ public class Window {
 	
 	public void setLabel(String x) {
 		label.setText("<html>" + x + "</html>");
-		label.addMouseListener(new MouseAdapter() { 
+		/*label.addMouseListener(new MouseAdapter() { 
 		    public void mouseClicked(MouseEvent e) {
 		       frame2 = new JFrame("new frame");
 		       frame2.setResizable(false);
@@ -56,8 +56,8 @@ public class Window {
 		       frame2.setVisible(true);
 		       frame2.setAlwaysOnTop(true);
 		       frame2.pack();
-		    }  
-		}); 
+		    }
+		});*/
 	}
 	
 	public void extendLabel(String x) {
