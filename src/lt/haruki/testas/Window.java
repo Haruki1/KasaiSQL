@@ -48,10 +48,8 @@ public class Window {
 	
 	public void setLabel(String x) {
 		label.setText("<html>" + x + "</html>");
-		label.addMouseListener(new MouseAdapter() {  
-		    public void mouseClicked(MouseEvent e) {  
-		       // you can open a new frame here as
-		       // i have assumed you have declared "frame" as instance variable
+		label.addMouseListener(new MouseAdapter() { 
+		    public void mouseClicked(MouseEvent e) {
 		       frame2 = new JFrame("new frame");
 		       frame2.setResizable(false);
 		       frame2.setLocationRelativeTo(null);
