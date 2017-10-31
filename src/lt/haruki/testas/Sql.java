@@ -41,7 +41,7 @@ public class Sql {
 	
 	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
-		window = new Window(640, 480, title);
+		window = new Window(1280, 720, title);
 		this.DB_HOSTNAME = DB_HOSTNAME;
 		this.DB_ENCODING = DB_ENCODING;
 		this.DB_NAME = DB_NAME;
@@ -60,22 +60,22 @@ public class Sql {
 			while(rs.next()) {
 				tHeight++;
 			}
-			System.out.println("DEBUG: " + tWidth + " " + tHeight);
 			content = new Object[tHeight][tWidth];
-			System.out.println("len" + content.length);
-			System.out.println("len" + content[0].length);
 			header = new Object[tWidth];
-			System.out.println("lenn" + header.length);
 			for (int i = 0; i < tWidth; i++) {
 				header[i] = rsm.getColumnName(i+1);
 			}
 			rs = s.executeQuery(query);
-			System.out.println("-------------------------------------------------------------");
+			for(int i = 0; i < tWidth; i++)
+				System.out.print("-------------");
+			System.out.println("-");
 			for(Object s: header) {
 				System.out.format("|%12s", s);
 			}
-			System.out.println("|\n");
-			System.out.println("-------------------------------------------------------------");
+			System.out.println("|");
+			for(int i = 0; i < tWidth; i++)
+				System.out.print("-------------");
+			System.out.println("-");
 			while(rs.next()) {
 				for(int i = 0; i < tWidth; i++) {
 					content[j][i] = rs.getString(rsm.getColumnName(i+1));
@@ -84,10 +84,11 @@ public class Sql {
 				j++;
 				System.out.print("|\n");
 			}
-			System.out.println("-------------------------------------------------------------");
+			for(int i = 0; i < tWidth; i++)
+				System.out.print("-------------");
+			System.out.println("-");
 		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println ("Unable to execute query!");
+			System.out.println ("Unable to execute query! Wrong syntax?");
 			ShowSQLException(e);
 		}
 		window.drawTable(content, header);
@@ -179,12 +180,12 @@ public class Sql {
 	public void endConnection() {
 		System.out.println ("Closing database resources and rolling back any changes we made to the database.");
 
-		try {if (rs!=null) rs.close ();} catch(SQLException e) {ShowSQLException(e);}
+		try {if (rs!=null) rs.close ();} catch(SQLException e) {}
 		
-		try {if (s!=null) s.close ();} catch(SQLException e) {ShowSQLException(e);}
+		try {if (s!=null) s.close ();} catch(SQLException e) {}
 
-		try {if (c!=null) c.rollback ();} catch(SQLException e) {ShowSQLException(e);}
+		try {if (c!=null) c.rollback ();} catch(SQLException e) {}
 		
-		try {if (c!=null) c.close ();} catch(SQLException e) {ShowSQLException(e);}
+		try {if (c!=null) c.close ();} catch(SQLException e) {}
 	}
 }

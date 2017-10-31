@@ -2,8 +2,8 @@ package lt.haruki.testas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+//import java.awt.event.MouseAdapter;
+//import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 
 public class Window {
 	private JFrame frame;
-	private JFrame frame2;
+	//private JFrame frame2;
 	private JLabel label;
 	private JTable table;
 	private int width;
@@ -38,7 +38,6 @@ public class Window {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		//frame.setUndecorated(true);
 		
 		frame.add(label);
 		
@@ -69,6 +68,7 @@ public class Window {
 		table.setAutoCreateRowSorter(true);
 		table.getRowSorter().toggleSortOrder(0);
 		frame.add(new JScrollPane(table), BorderLayout.CENTER);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		frame.pack();
 	}
 	
