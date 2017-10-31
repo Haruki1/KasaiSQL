@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -40,6 +41,7 @@ public class Window {
 		frame.setTitle(title);
 		frame.setSize(width, height);
 		frame.setResizable(false);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		
@@ -47,39 +49,55 @@ public class Window {
 		file.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(file);
 		JMenu edit = new JMenu("Edit");
-		file.setMnemonic(KeyEvent.VK_E);
+		edit.setMnemonic(KeyEvent.VK_E);
 		menuBar.add(edit);
 		JMenu view = new JMenu("View");
-		file.setMnemonic(KeyEvent.VK_V);
+		view.setMnemonic(KeyEvent.VK_V);
 		menuBar.add(view);
 		JMenu help = new JMenu("Help");
-		file.setMnemonic(KeyEvent.VK_H);
+		help.setMnemonic(KeyEvent.VK_H);
 		menuBar.add(help);
+		JMenu secret = new JMenu(";]");
+		menuBar.add(Box.createHorizontalGlue());
+		menuBar.add(secret);
 		
-		JMenuItem item1 = new JMenuItem("New");
-		JMenuItem item2 = new JMenuItem("Open");
-		JMenuItem item3 = new JMenuItem("Save");
-		JMenuItem item4 = new JMenuItem("Save As...");
-		JMenuItem item5 = new JMenuItem("Exit");
-		item1.setMnemonic(KeyEvent.VK_N);
-		item2.setMnemonic(KeyEvent.VK_O);
-		item3.setMnemonic(KeyEvent.VK_S);
-		item4.setMnemonic(KeyEvent.VK_A);
-		item5.setMnemonic(KeyEvent.VK_E);
-		item1.setToolTipText("New Table");
-		item2.setToolTipText("Open Table");
-		item3.setToolTipText("Save Table");
-		item4.setToolTipText("Save Table as SQL file");
-		item5.setToolTipText("Exit application");
-		item5.addActionListener((ActionEvent event) -> {
+		//FILE Menu Items
+		JMenuItem fileItem1 = new JMenuItem("New Connection...");
+		fileItem1.setMnemonic(KeyEvent.VK_C);
+		fileItem1.setToolTipText("Initialize New Connection To Database");
+		JMenuItem fileItem2 = new JMenuItem("New");
+		fileItem2.setMnemonic(KeyEvent.VK_N);
+		fileItem2.setToolTipText("New Table");
+		JMenuItem fileItem3 = new JMenuItem("Open");
+		fileItem3.setMnemonic(KeyEvent.VK_O);
+		fileItem3.setToolTipText("Open Table");
+		JMenuItem fileItem4 = new JMenuItem("Save");
+		fileItem4.setMnemonic(KeyEvent.VK_S);
+		fileItem4.setToolTipText("Save Table");
+		JMenuItem fileItem5 = new JMenuItem("Save As...");
+		fileItem5.setMnemonic(KeyEvent.VK_A);
+		fileItem5.setToolTipText("Save Table as SQL file");
+		JMenuItem fileItem6 = new JMenuItem("Exit");
+		fileItem6.setMnemonic(KeyEvent.VK_E);
+		fileItem6.setToolTipText("Exit application");
+		fileItem6.addActionListener((ActionEvent event) -> {
 			System.exit(0);
 		});
 		
-	    file.add(item1);
-	    file.add(item2);
-	    file.add(item3);
-	    file.add(item4);
-	    file.add(item5);
+		JMenuItem secretItem = new JMenuItem("Don't Click Me");
+		secretItem.addActionListener((ActionEvent event) -> {
+			frame.setTitle("It's peanut butter jelly time!");
+		});
+		secret.add(secretItem);
+		
+		file.add(fileItem1);
+		file.addSeparator();
+	    file.add(fileItem2);
+	    file.add(fileItem3);
+	    file.add(fileItem4);
+	    file.add(fileItem5);
+	    file.addSeparator();
+	    file.add(fileItem6);
 	        
 		frame.add(label);
 		frame.setJMenuBar(menuBar);

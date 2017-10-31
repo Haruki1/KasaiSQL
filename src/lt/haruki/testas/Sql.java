@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class Sql {
 	
-	/*== CONNECTION SETTINGS ==================================================*/
+	/*== CONNECTION CONSTANTS ==================================================*/
 	public final String DB_DRIVER_CLASS = "org.firebirdsql.jdbc.FBDriver";
 	public final String DB_DRIVER_NAME = "jdbc:firebirdsql";
 	public final String DB_HOSTNAME;
@@ -42,7 +42,7 @@ public class Sql {
 	
 	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
-		window = new Window(1280, 720, title);
+		window = new Window(1024, 768, title);
 		this.DB_HOSTNAME = DB_HOSTNAME;
 		this.DB_ENCODING = DB_ENCODING;
 		this.DB_NAME = DB_NAME;
@@ -154,7 +154,7 @@ public class Sql {
 	public void DisableAutoCommit() {
 		try {
 			c.setAutoCommit (false);
-			System.out.println ("Auto-commit is disabled.");
+			System.out.println ("Auto-commit has been disabled.");
 		} catch (SQLException e) {
 			System.out.println ("Unable to disable autocommit.");
 			ShowSQLException(e);
