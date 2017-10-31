@@ -68,12 +68,15 @@ public class Sql {
 			}
 			rs = s.executeQuery(query);
 			System.out.println("-------------------------------------------------------------");
-			System.out.format("| %12s | %12s | %12s | %12s |\n", header);
+			for(Object s: header) {
+				System.out.format("|%12s", s);
+			}
+			System.out.println("|\n");
 			System.out.println("-------------------------------------------------------------");
 			while(rs.next()) {
 				for(int i = 0; i < tWidth; i++) {
 					content[j][i] = rs.getString(rsm.getColumnName(i+1));
-					System.out.format("| %12s ",rs .getString(rsm.getColumnName(i+1)));
+					System.out.format("|%12s",rs .getString(rsm.getColumnName(i+1)));
 				}
 				j++;
 				System.out.print("|\n");
