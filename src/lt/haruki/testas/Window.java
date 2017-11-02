@@ -1,7 +1,8 @@
 package lt.haruki.testas;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -34,16 +35,25 @@ public class Window {
 
 	private void InitializeWindow() {
 		frame = new JFrame();
-		menuBar = new JMenuBar();
-		frame.setLayout(new FlowLayout());
-		label = new JLabel("", SwingConstants.CENTER);
-		table = new JTable();
+		frame.setLayout(new GridLayout(2, 0, 0, 0));
 		frame.setTitle(title);
 		frame.setSize(width, height);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
+		
+		frame.setVisible(true);
+		
+		
+		
+	}
+	
+	public void AddElementsToWindow() {
+		
+		menuBar = new JMenuBar();
+		label = new JLabel("", SwingConstants.CENTER);
+		table = new JTable();
 		
 		JMenu file = new JMenu("File");
 		file.setMnemonic(KeyEvent.VK_F);
@@ -87,6 +97,7 @@ public class Window {
 		JMenuItem secretItem = new JMenuItem("Don't Click Me");
 		secretItem.addActionListener((ActionEvent event) -> {
 			frame.setTitle("It's peanut butter jelly time!");
+			frame.getContentPane().setBackground(Color.YELLOW);
 		});
 		secret.add(secretItem);
 		
@@ -101,11 +112,6 @@ public class Window {
 	        
 		frame.add(label);
 		frame.setJMenuBar(menuBar);
-		
-		frame.setVisible(true);
-		
-		
-		
 	}
 	
 	public void setLabel(String x) {
@@ -117,11 +123,11 @@ public class Window {
 	}
 	
 	public void drawTable(Object[][] content, Object[] header) {
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table = new JTable(content, header);
 		table.setAutoCreateRowSorter(true);
-		table.getRowSorter().toggleSortOrder(0);
+		//table.getRowSorter().toggleSortOrder(0);
 		frame.add(new JScrollPane(table), BorderLayout.CENTER);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		frame.pack();
 	}
 	

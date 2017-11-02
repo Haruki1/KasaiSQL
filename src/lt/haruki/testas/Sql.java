@@ -43,6 +43,7 @@ public class Sql {
 	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
 		window = new Window(1024, 768, title);
+		window.AddElementsToWindow();
 		this.DB_HOSTNAME = DB_HOSTNAME;
 		this.DB_ENCODING = DB_ENCODING;
 		this.DB_NAME = DB_NAME;
@@ -50,6 +51,18 @@ public class Sql {
 		this.DB_PASSWORD = DB_PASSWORD;
 		this.DB_TABLE_NAME = DB_TABLE_NAME;
 		DB_URL = DB_DRIVER_NAME + ":" + DB_HOSTNAME + ":" + DB_NAME + "?lc_ctype=" + DB_ENCODING;
+	}
+	
+	public Object[] getHeader() {
+		if(header == null)
+			return null;
+		return header;
+	}
+	
+	public Object[] getContent() {
+		if(content == null)
+			return null;
+		return content;
 	}
 	
 	public void DoQuery(String query) {
@@ -171,6 +184,7 @@ public class Sql {
 			next = next.getNextException();
 		}
 	}
+	
 	public void ShowTables() {
 		try {
 			dbMetaData = c.getMetaData ();
