@@ -84,6 +84,7 @@ public class Sql {
 					header[i] = rsm.getColumnName(i+1);
 				}
 				rs = s.executeQuery(query);
+				System.out.println();
 				for(int i = 0; i < tWidth; i++)
 					System.out.print("-------------");
 				System.out.println("-");
@@ -210,7 +211,7 @@ public class Sql {
 	}
 	
 	public void endConnection() {
-		System.out.println ("Closing database resources and rolling back any changes we made to the database.");
+		System.out.println ("\nClosing database resources and rolling back any changes we made to the database.");
 
 		try {if (rs!=null) rs.close ();} catch(SQLException e) {}
 		

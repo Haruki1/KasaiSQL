@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.security.auth.login.AppConfigurationEntry;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +17,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class Window {
-	
-	private App app;
 	
 	private JFrame frame;
 	private JMenuBar menuBar;
@@ -68,7 +65,7 @@ public class Window {
 		JMenu help = new JMenu("Help");
 		help.setMnemonic(KeyEvent.VK_H);
 		menuBar.add(help);
-		JMenu secret = new JMenu(";]");
+		JMenu secret = new JMenu(":)");
 		menuBar.add(Box.createHorizontalGlue());
 		menuBar.add(secret);
 		
@@ -77,7 +74,7 @@ public class Window {
 		fileItem1.setMnemonic(KeyEvent.VK_C);
 		fileItem1.setToolTipText("Initialize New Connection To Database");
 		fileItem1.addActionListener((ActionEvent event) -> {
-			app.cDialog.setVisible(true);
+			App.cDialog.setVisible(true);
 			frame.dispose();
 		});
 		JMenuItem fileItem2 = new JMenuItem("New");

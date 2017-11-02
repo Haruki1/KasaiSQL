@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class NewConnectionDialog {
@@ -48,11 +49,9 @@ public class NewConnectionDialog {
 		return passwordField;
 	}
 
-	public void setPasswordField(JTextField passwordField) {
+	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
-
-	private App app;
 	
 	private JDialog start;
 	private BoxLayout bl;
@@ -61,10 +60,9 @@ public class NewConnectionDialog {
 	private JTextField encodingField;
 	private JTextField databaseField;
 	private JTextField userField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	
-	public NewConnectionDialog(App app) {
-		this.app = app;
+	public NewConnectionDialog() {
 		InitializeWindow();
 	}
 	
@@ -82,7 +80,8 @@ public class NewConnectionDialog {
 		encodingField = new JTextField("utf8", 100);
 		databaseField = new JTextField("c:/users/darbinis/desktop/testas.fdb",100);
 		userField  = new JTextField("SYSDBA" ,100);
-		passwordField = new JTextField("testas", 100);
+		passwordField = new JPasswordField("testas", 100);
+		passwordField.setEchoChar('*');
 		start.add(new JLabel("Hostname: "));
 		start.add(hostnameField);
 		start.add(new JLabel("Database Encoding: "));
@@ -95,7 +94,7 @@ public class NewConnectionDialog {
 		start.add(passwordField);
 		start.add(connect);
 		
-		start.setSize(480,320);
+		start.setSize(360,240);
 		start.setResizable(false);
 		start.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		start.setLocationRelativeTo(null);
@@ -104,7 +103,8 @@ public class NewConnectionDialog {
 		
 		connect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				app.useSql();
+				App.UseSql();
+				//TODO: App.ResetVariables();
 				start.dispose();
 			}
 		});

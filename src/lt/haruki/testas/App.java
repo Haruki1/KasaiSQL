@@ -20,9 +20,7 @@ public class App {
 	
 	public static void main(String args[]) {
 		
-		App app = new App();
-		
-		cDialog = new NewConnectionDialog(app);
+		cDialog = new NewConnectionDialog();
 		AssignVariables(cDialog);
 		
 	}
@@ -36,7 +34,11 @@ public class App {
 		password = cDialog.getPasswordField().getText();
 	}
 	
-	protected void useSql() {
+	public static void ResetVariables() {
+		hostname = encoding = database = user = password = "";
+	}
+	
+	protected static void UseSql() {
 		sql = new Sql(TITLE + "-" + VERSION, hostname, encoding, database, user, password);
 		
 		sql.PrintDriverVersion();
@@ -44,8 +46,7 @@ public class App {
 		sql.DisableAutoCommit();
 		sql.ShowTables();
 		/*==QUERIES====================================================*/
-		sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id, b.diena, b.status"
-				+ " FROM CARS a LEFT OUTER JOIN days b USING (car_id)");
+		sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id, b.diena, b.status FROM CARS a LEFT OUTER JOIN days b USING (car_id)");
 		/*=============================================================*/
 		sql.endConnection();
 	}
