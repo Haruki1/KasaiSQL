@@ -78,6 +78,7 @@ public class Window {
 		fileItem1.setToolTipText("Initialize New Connection To Database");
 		fileItem1.addActionListener((ActionEvent event) -> {
 			app.cDialog.setVisible(true);
+			frame.dispose();
 		});
 		JMenuItem fileItem2 = new JMenuItem("New");
 		fileItem2.setMnemonic(KeyEvent.VK_N);
