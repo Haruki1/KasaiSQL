@@ -42,7 +42,7 @@ public class Sql {
 	
 	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
 		RegisterSqlDriver();
-		window = new Window(1024, 768, title);
+		window = new Window(800, 600, title);
 		window.AddElementsToWindow();
 		this.DB_HOSTNAME = DB_HOSTNAME;
 		this.DB_ENCODING = DB_ENCODING;
@@ -117,7 +117,7 @@ public class Sql {
 				s = c.createStatement();
 				rs = s.executeQuery(query);
 			} catch(SQLException e) {
-				System.out.println("Unable to update records!");
+				System.out.println("Unable to update/insert record(s)!");
 				ShowSQLException(e);
 			}
 		} else {

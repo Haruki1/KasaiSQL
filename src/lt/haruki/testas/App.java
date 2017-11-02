@@ -42,10 +42,11 @@ public class App {
 	
 	private static void InitializeStartWindow() {
 		start = new JDialog();
+		start.setTitle("KasaiSQL > New Connection...");
 		bl = new BoxLayout(start.getContentPane(), 1);
 		connect = new JButton("Connect");
 		start.setLayout(bl);
-		hostnameField = new JTextField("localhost", 100);
+		hostnameField = new JTextField("127.0.0.1", 100);
 		encodingField = new JTextField("utf8", 100);
 		databaseField = new JTextField("c:/users/darbinis/desktop/testas.fdb",100);
 		userField  = new JTextField("SYSDBA" ,100);

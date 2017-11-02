@@ -39,7 +39,6 @@ public class Window {
 		frame.setTitle(title);
 		frame.setSize(width, height);
 		frame.setResizable(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		
@@ -128,7 +127,6 @@ public class Window {
 		table.setAutoCreateRowSorter(true);
 		//table.getRowSorter().toggleSortOrder(0);
 		frame.add(new JScrollPane(table), BorderLayout.CENTER);
-		frame.pack();
 	}
 	
 }
