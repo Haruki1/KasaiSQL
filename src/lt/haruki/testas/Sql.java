@@ -19,7 +19,6 @@ public class Sql {
 	public final String DB_NAME;
 	public final String DB_USER;
 	public final String DB_PASSWORD;
-	public final String DB_TABLE_NAME;
 	
 	public final String DB_URL;
 	/*=========================================================================*/
@@ -33,6 +32,8 @@ public class Sql {
 	
 	private Window window;
 	
+	@SuppressWarnings("unused")
+	private String dbTable;
 	public Object[][] content;
 	public Object[] header;
 	private int tWidth = 0;
@@ -40,7 +41,7 @@ public class Sql {
 	private int j = 0;
 	String firstWord;
 	
-	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD, final String DB_TABLE_NAME) {
+	public Sql(String title, final String DB_HOSTNAME, final String DB_ENCODING, final String DB_NAME, final String DB_USER, final String DB_PASSWORD) {
 		RegisterSqlDriver();
 		window = new Window(800, 600, title);
 		window.AddElementsToWindow();
@@ -49,7 +50,6 @@ public class Sql {
 		this.DB_NAME = DB_NAME;
 		this.DB_USER = DB_USER;
 		this.DB_PASSWORD = DB_PASSWORD;
-		this.DB_TABLE_NAME = DB_TABLE_NAME;
 		DB_URL = DB_DRIVER_NAME + ":" + DB_HOSTNAME + ":" + DB_NAME + "?lc_ctype=" + DB_ENCODING;
 	}
 	

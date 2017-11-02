@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.security.auth.login.AppConfigurationEntry;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,9 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class Window {
+	
+	private App app;
+	
 	private JFrame frame;
 	private JMenuBar menuBar;
 	private JLabel label;
@@ -35,7 +39,7 @@ public class Window {
 
 	private void InitializeWindow() {
 		frame = new JFrame();
-		frame.setLayout(new GridLayout(2, 0, 0, 0));
+		frame.setLayout(new GridLayout(0, 2, 0, 0));
 		frame.setTitle(title);
 		frame.setSize(width, height);
 		frame.setResizable(true);
@@ -43,8 +47,6 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 		
 		frame.setVisible(true);
-		
-		
 		
 	}
 	
@@ -74,6 +76,9 @@ public class Window {
 		JMenuItem fileItem1 = new JMenuItem("New Connection...");
 		fileItem1.setMnemonic(KeyEvent.VK_C);
 		fileItem1.setToolTipText("Initialize New Connection To Database");
+		fileItem1.addActionListener((ActionEvent event) -> {
+			app.cDialog.setVisible(true);
+		});
 		JMenuItem fileItem2 = new JMenuItem("New");
 		fileItem2.setMnemonic(KeyEvent.VK_N);
 		fileItem2.setToolTipText("New Table");
@@ -127,6 +132,7 @@ public class Window {
 		table.setAutoCreateRowSorter(true);
 		//table.getRowSorter().toggleSortOrder(0);
 		frame.add(new JScrollPane(table), BorderLayout.CENTER);
+		frame.pack();
 	}
 	
 }
