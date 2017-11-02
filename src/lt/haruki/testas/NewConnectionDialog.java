@@ -73,7 +73,7 @@ public class NewConnectionDialog {
 	}
 	
 	private void InitializeWindow() {
-		start = new JDialog();
+		start = new JDialog((JDialog)null);
 		start.setTitle("KasaiSQL > New Connection...");
 		bl = new BoxLayout(start.getContentPane(), 1);
 		connect = new JButton("Connect");
