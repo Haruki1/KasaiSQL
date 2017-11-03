@@ -21,12 +21,12 @@ public class App {
 	public static void main(String args[]) {
 		
 		cDialog = new NewConnectionDialog();
-		AssignVariables(cDialog);
+		AssignVariables();
 		
 	}
 	
 	
-	private static void AssignVariables(NewConnectionDialog cDialog) {
+	public static void AssignVariables() {
 		hostname = cDialog.getHostnameField().getText();
 		encoding = cDialog.getEncodingField().getText();
 		database = cDialog.getDatabaseField().getText();
@@ -39,6 +39,7 @@ public class App {
 	}
 	
 	protected static void UseSql() {
+				
 		sql = new Sql(TITLE + "-" + VERSION, hostname, encoding, database, user, password);
 		
 		sql.PrintDriverVersion();
@@ -46,7 +47,31 @@ public class App {
 		sql.DisableAutoCommit();
 		sql.ShowTables();
 		/*==QUERIES====================================================*/
-		sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id, b.diena, b.status FROM CARS a LEFT OUTER JOIN days b USING (car_id)");
+		
+		sql.DoQuery("SELECT a.car_id, a.car_model, a.garage_id,\r\n" + 
+				"sum(case when b.STATUS = 'D' then 1 else 0 end) as Dirbta,\r\n" + 
+				"sum(case when b.STATUS = 'TA' then 1 else 0 end) as TechnineApziura,\r\n" + 
+				"sum(case when b.STATUS = 'R' then 1 else 0 end) as Remontas,\r\n" + 
+				"sum(case when b.STATUS = 'RZ' then 1 else 0 end) as Rezervuota,\r\n" + 
+				"sum(case when b.STATUS = 'BV' then 1 else 0 end) as BeVairuotojo,\r\n" + 
+				"sum(case when b.STATUS = 'I' then 1 else 0 end) as Iseigine,\r\n" + 
+				"sum(case when b.STATUS = 'LR' then 1 else 0 end) as LaukiaRemonto\r\n" + 
+				"FROM CARS a left outer JOIN days b\r\n" + 
+				"on b.car_id = a.car_id\r\n" + 
+				"group by a.car_id, a.car_model, a.garage_id");
+		
+		/*
+		for(int i = 0; i < carid.length; i++) {
+			sql.DoQuery("INSERT INTO CARS (CAR_ID, CAR_MODEL, GARAGE_ID) VALUES ('"+ carid[i] +"', '"+ carmodel[i] +"', '"+ garageid[i] +"');");
+		}
+		
+		for(int j = 0; j < status.length; j++) {
+			for(int i = 0; i < status[0].length; i++) {
+				sql.DoQuery("INSERT INTO DAYS (CAR_ID, DIENA, STATUS) VALUES ('"+carid[j]+"','"+(i+1)+".03.2017','"+status[j][i]+"');");
+			}
+		}
+		*/
+		
 		/*=============================================================*/
 		sql.endConnection();
 	}

@@ -104,7 +104,9 @@ public class NewConnectionDialog {
 		connect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				App.UseSql();
-				//TODO: App.ResetVariables();
+				App.ResetVariables();
+				App.AssignVariables();
+				//TODO: Fix future connections after opening table.
 				start.dispose();
 			}
 		});

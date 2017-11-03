@@ -36,7 +36,7 @@ public class Window {
 
 	private void InitializeWindow() {
 		frame = new JFrame();
-		frame.setLayout(new GridLayout(0, 2, 0, 0));
+		frame.setLayout(new GridLayout(0, 1, 0, 0));
 		frame.setTitle(title);
 		frame.setSize(width, height);
 		frame.setResizable(true);
@@ -128,7 +128,7 @@ public class Window {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table = new JTable(content, header);
 		table.setAutoCreateRowSorter(true);
-		//table.getRowSorter().toggleSortOrder(0);
+		table.getRowSorter().toggleSortOrder(0);
 		frame.add(new JScrollPane(table), BorderLayout.CENTER);
 		frame.pack();
 	}

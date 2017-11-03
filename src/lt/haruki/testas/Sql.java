@@ -81,30 +81,30 @@ public class Sql {
 				content = new Object[tHeight][tWidth];
 				header = new Object[tWidth];
 				for (int i = 0; i < tWidth; i++) {
-					header[i] = rsm.getColumnName(i+1);
+					header[i] = rsm.getColumnLabel(i+1);
 				}
 				rs = s.executeQuery(query);
 				System.out.println();
 				for(int i = 0; i < tWidth; i++)
-					System.out.print("-------------");
+					System.out.print("-------------------------");
 				System.out.println("-");
 				for(Object s: header) {
-					System.out.format("|%12s", s);
+					System.out.format("|%24s", s);
 				}
 				System.out.println("|");
 				for(int i = 0; i < tWidth; i++)
-					System.out.print("-------------");
+					System.out.print("-------------------------");
 				System.out.println("-");
 				while(rs.next()) {
 					for(int i = 0; i < tWidth; i++) {
-						content[j][i] = rs.getString(rsm.getColumnName(i+1));
-						System.out.format("|%12s",rs .getString(rsm.getColumnName(i+1)));
+						content[j][i] = rs.getString(rsm.getColumnLabel(i+1));
+						System.out.format("|%24s",rs .getString(rsm.getColumnName(i+1)));
 					}
 					j++;
 					System.out.print("|\n");
 				}
 				for(int i = 0; i < tWidth; i++)
-					System.out.print("-------------");
+					System.out.print("-------------------------");
 				System.out.println("-");
 			} catch (SQLException e) {
 				System.out.println ("Unable to execute query! Wrong syntax?");
@@ -116,7 +116,7 @@ public class Sql {
 		} else if(firstWord.equalsIgnoreCase("update") || firstWord.equalsIgnoreCase("insert")) {
 			try {
 				s = c.createStatement();
-				rs = s.executeQuery(query);
+				s.executeQuery(query);
 			} catch(SQLException e) {
 				System.out.println("Unable to update/insert record(s)!");
 				ShowSQLException(e);
@@ -157,7 +157,7 @@ public class Sql {
 		try {
 			c = DriverManager.getConnection (DB_URL, DB_USER, DB_PASSWORD);
 			System.out.println ("Connection established.");
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println ("Unable to establish a connection through the driver manager.");
 			ShowSQLException(e);
@@ -167,9 +167,9 @@ public class Sql {
 	
 	public void DisableAutoCommit() {
 		try {
-			c.setAutoCommit (false);
+			c.setAutoCommit(false);
 			System.out.println ("Auto-commit has been disabled.");
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			System.out.println ("Unable to disable autocommit.");
 			ShowSQLException(e);
 			return;
@@ -203,7 +203,7 @@ public class Sql {
 				window.extendLabel(tables.getString("TABLE_NAME") + " ");
 			}
 			System.out.println();
-			tables.close ();
+			tables.close();
 		} catch (SQLException e) {
 			System.out.println ("Unable to extract database meta data.");
 			ShowSQLException(e);
